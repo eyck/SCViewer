@@ -53,12 +53,14 @@ public class BitVector {
 		for(int i=resWidth-1; i>=0; i--){
 			int digit=0;
 			for(int j=3; j>=0; j--){
-				if(value[4*i+j]==VALUE_X ||value[4*i+j]==VALUE_Z ){
-					res[i]=VALUE_X;
+				if((4*i+j)<value.length){
+					if(value[4*i+j]==VALUE_X ||value[4*i+j]==VALUE_Z ){
+						res[i]=VALUE_X;
+					}
+					if(value[4*i+j]==VALUE_1)
+						digit+=1<<(3-j);
+					res[i]=Character.forDigit(digit, 16); //((digit < 10) ? '0' + digit : 'a' + digit -10)
 				}
-				if(value[4*i+j]==VALUE_1)
-					digit+=1<<(3-j);
-				res[i]=Character.forDigit(digit, 16); //((digit < 10) ? '0' + digit : 'a' + digit -10)
 			}
 		}
 		return new String(res);		

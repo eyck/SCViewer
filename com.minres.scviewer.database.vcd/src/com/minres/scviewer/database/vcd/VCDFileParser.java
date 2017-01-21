@@ -19,7 +19,7 @@ class VCDFileParser {
 	private StreamTokenizer tokenizer;
 	private IVCDDatabaseBuilder traceBuilder;
 	private HashMap<String, Integer> nameToNetMap = new HashMap<String, Integer>();
-	private long picoSecondsPerIncrement;
+	private float picoSecondsPerIncrement;
 	private boolean stripNetWidth;
 	long currentTime;
 
@@ -95,7 +95,11 @@ class VCDFileParser {
 			nextToken();
 		}
 		switch (s.charAt(s.length() - 2)){
-		case 'p': // Nano-seconds
+		case 'f': // femto-seconds
+			picoSecondsPerIncrement = 0.001F;
+			s = s.substring(0, s.length() - 2).trim();
+			break;
+		case 'p': // pico-seconds
 			picoSecondsPerIncrement = 1;
 			s = s.substring(0, s.length() - 2).trim();
 			break;
@@ -145,7 +149,7 @@ class VCDFileParser {
 	private boolean parseTransition() throws Exception {
 		if (!nextToken()) return false;
 		if (tokenizer.sval.charAt(0) == '#') {	// If the line begins with a #, this is a timestamp.
-			currentTime = Long.parseLong(tokenizer.sval.substring(1)) * picoSecondsPerIncrement;
+			currentTime = (long)(Long.parseLong(tokenizer.sval.substring(1)) * picoSecondsPerIncrement);
 		} else {
 			if(tokenizer.sval.equals("$comment")){
 				do {

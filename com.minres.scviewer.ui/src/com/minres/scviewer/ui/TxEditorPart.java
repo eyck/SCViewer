@@ -57,8 +57,8 @@ import com.minres.scviewer.ui.views.TxOutlinePage;
 
 public class TxEditorPart extends EditorPart implements ITabbedPropertySheetPageContributor {
 
-	private IWaveformDbFactory waveformDbFactory;
-	
+	private static IWaveformDbFactory waveformDbFactory;
+
 	public synchronized void bind(IWaveformDbFactory factory){
 		waveformDbFactory=factory;
 	}
