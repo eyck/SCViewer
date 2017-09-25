@@ -1,6 +1,8 @@
 SCViewer
 ========
 
+Note: Please be aware that the development has moved to https://github.com/Minres/SCViewer
+
 SCViewer is composed of a set of eclipse plugins to display VCD and transaction streams 
 created by the SystemC VCD trace implementation and the SystemC Verification Library (SCV).
 For further description of the SCV please refer to 
